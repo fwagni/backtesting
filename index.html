@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Backtesting lab</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..750&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to results</a>
+  <header class="top">
+    <div class="brand">
+      <h1>Backtesting lab</h1>
+      <p class="source" id="source">Loading data…</p>
+    </div>
+    <div class="top-actions">
+      <button class="btn ghost only-mobile" id="openFilters" aria-controls="filters" aria-expanded="false">Filters <span class="count" id="filterCount"></span></button>
+      <div class="seg" role="radiogroup" aria-label="Show results in">
+        <button role="radio" data-unit="R" aria-checked="true">R</button>
+        <button role="radio" data-unit="$" aria-checked="false">$</button>
+        <button role="radio" data-unit="%" aria-checked="false">%</button>
+      </div>
+      <label class="btn ghost" title="Load Notion CSV exports from your computer (kept in this browser tab only)">
+        Load CSV<input type="file" id="fileInput" accept=".csv,text/csv" multiple hidden>
+      </label>
+      <button class="btn ghost icon" id="themeToggle" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <div class="filters-head">
+        <h2>Filters</h2>
+        <button class="link" id="resetFilters">Reset</button>
+        <button class="btn ghost icon only-mobile" id="closeFilters" aria-label="Close filters">✕</button>
+      </div>
+      <section class="fgroup">
+        <h3>Period</h3>
+        <select id="datePreset" aria-label="Period">
+          <option value="all">All dates</option>
+          <option value="week">This week</option>
+          <option value="month">This month</option>
+          <option value="30d">Last 30 days</option>
+          <option value="90d">Last 90 days</option>
+          <option value="ytd">Year to date</option>
+          <option value="12m">Last 12 months</option>
+          <option value="custom">Custom range</option>
+        </select>
+        <div class="daterange">
+          <label>From<input type="date" id="dateFrom"></label>
+          <label>To<input type="date" id="dateTo"></label>
+        </div>
+      </section>
+      <div id="filterControls"></div>
+    </aside>
+
+    <main id="main" tabindex="-1">
+      <nav class="tabs" role="tablist" aria-label="Pages" id="tabs"></nav>
+      <div class="chips" id="chips" aria-live="polite"></div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/stats.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
